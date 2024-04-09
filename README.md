@@ -2,7 +2,7 @@
 
 A weekend project to learn Godot
 
-you can play it at [queenkjuul.xyz](https://queenkjuul.xyz)
+you can play it at [queenkjuul.xyz/trench](https://queenkjuul.xyz/trench)
 
 Assets are not included, so you won't be able to build this repo directly.
 
