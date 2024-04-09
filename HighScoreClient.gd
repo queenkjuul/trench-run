@@ -2,7 +2,7 @@ extends Node
 signal new_high_score
 
 # manually input at build time
-const AES_KEY = '4a9e19306b71207a1a0eaacb75e7f04faf218625a4020a300dcebc4b78997638'
+const AES_KEY = 'a29a322efcb934aff723e02317e7c6753239c9435f0394828b55789e57d0edae'
 const RSA_KEY = '56fc544002506a88448686893704d92a02c63943ab809e6fbc4645777dcbfcec'
 
 var aes = AESContext.new()
