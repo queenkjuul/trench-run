@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://PressStart2P.tres" type="DynamicFont" id=1]
+[ext_resource path="res://HighScoreInput.gd" type="Script" id=2]
+[ext_resource path="res://TinyPixels.tres" type="DynamicFont" id=3]
+
+[node name="HighScoreInput" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 100.0
+margin_right = 700.0
+margin_bottom = 148.0
+custom_fonts/font = ExtResource( 1 )
+text = "NEW HIGH SCORE
+CONGRATULATIONS!
+ENTER YOUR NAME"
+align = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.33
+autostart = true
+
+[node name="Columns" type="Node" parent="."]
+
+[node name="Column1" type="Label" parent="Columns"]
+margin_left = 310.0
+margin_top = 202.0
+margin_right = 325.0
+margin_bottom = 217.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+align = 1
+
+[node name="Column2" type="Label" parent="Columns"]
+margin_left = 340.0
+margin_top = 202.0
+margin_right = 355.0
+margin_bottom = 217.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+align = 1
+
+[node name="Column3" type="Label" parent="Columns"]
+margin_left = 370.0
+margin_top = 202.0
+margin_right = 385.0
+margin_bottom = 217.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+align = 1
+
+[node name="End" type="Label" parent="Columns"]
+visible = false
+margin_left = 415.0
+margin_top = 202.0
+margin_right = 455.0
+margin_bottom = 216.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "END"
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

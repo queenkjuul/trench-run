@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rawAssets/R2D2-2.mp3" type="AudioStream" id=3]
+[ext_resource path="res://rawAssets/StarWarsMusic.mp3" type="AudioStream" id=4]
+[ext_resource path="res://PressStart2P.tres" type="DynamicFont" id=5]
+[ext_resource path="res://StarWarsFont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://rawAssets/xwing_up.png" type="Texture" id=7]
+[ext_resource path="res://StartButton.gd" type="Script" id=8]
+[ext_resource path="res://HighScoreClient.gd" type="Script" id=9]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Ties" type="Node" parent="."]
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+
+[node name="ExtraLifeSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 2.622
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="Controls" type="Label" parent="."]
+margin_right = 700.0
+margin_bottom = 960.0
+custom_fonts/font = ExtResource( 5 )
+text = "KEYBOARD
+
+MOVE: WASD or ARROWS
+FIRE: SPACE
+START: ENTER
+
+
+CONTROLLER
+
+MOVE: DPAD
+FIRE: PRIMARY BUTTON
+START: START BUTTON"
+align = 1
+valign = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+margin_right = 700.0
+margin_bottom = 960.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "game
+over"
+align = 1
+valign = 1
+
+[node name="LivesLabel" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 936.0
+margin_right = 64.0
+margin_bottom = 950.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 64.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 5 )
+text = "SCORE"
+
+[node name="Score" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 48.0
+margin_right = 214.0
+margin_bottom = 87.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="LevelLabel" type="Label" parent="."]
+margin_left = 600.0
+margin_top = 24.0
+margin_right = 640.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 5 )
+text = "LEVEL"
+
+[node name="Level" type="Label" parent="."]
+margin_left = 632.0
+margin_top = 48.0
+margin_right = 672.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="HighScoreLabel" type="Label" parent="."]
+margin_right = 700.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 5 )
+text = "HIGH SCORE"
+align = 1
+
+[node name="HighScore" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 700.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 5 )
+align = 1
+
+[node name="Logo" type="Label" parent="."]
+margin_top = 72.0
+margin_right = 707.0
+margin_bottom = 347.0
+rect_scale = Vector2( 0.99, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "TRENCH
+RUN"
+align = 1
+
+[node name="Copyright" type="Label" parent="Logo"]
+margin_top = 800.0
+margin_right = 700.0
+margin_bottom = 824.0
+custom_fonts/font = ExtResource( 5 )
+text = "(C) MMXXIV QUEEN K JUUL"
+align = 1
+
+[node name="TieTimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="LevelTimer" type="Timer" parent="."]
+
+[node name="LivesSprite" type="Sprite" parent="."]
+position = Vector2( 48, 910 )
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 7 )
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 250.0
+margin_top = 720.0
+margin_right = 450.0
+margin_bottom = 770.0
+custom_fonts/font = ExtResource( 5 )
+text = "START GAME"
+script = ExtResource( 8 )
+
+[node name="HighScoreClient" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="TopScoreRequest" type="HTTPRequest" parent="HighScoreClient"]
+
+[node name="SubmitScoreRequest" type="HTTPRequest" parent="HighScoreClient"]
+
+[connection signal="timeout" from="TieTimer" to="." method="_on_TieTimer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="new_high_score" from="HighScoreClient" to="." method="_on_HighScoreClient_new_high_score"]
+[connection signal="request_completed" from="HighScoreClient/TopScoreRequest" to="HighScoreClient" method="_on_TopScoreRequest_request_completed"]

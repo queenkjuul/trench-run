@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TinyPixels.tres" type="DynamicFont" id=1]
+[ext_resource path="res://PopupScore.gd" type="Script" id=2]
+
+[node name="PopupScore" type="Node2D"]
+z_index = 13
+z_as_relative = false
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.1, 1.1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://rawAssets/xwing_up.png" type="Texture" id=1]
+[ext_resource path="res://Xwing.gd" type="Script" id=2]
+[ext_resource path="res://rawAssets/xwing_blast.wav" type="AudioStream" id=3]
+[ext_resource path="res://rawAssets/WilhelmScream.mp3" type="AudioStream" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Xwing" type="Area2D"]
+position = Vector2( 5, 4 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 31.2, 40.1 )
+scale = Vector2( 0.0548266, 0.0548266 )
+frames = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 31.2, 61.1 )
+polygon = PoolVector2Array( -27, -10, -30, -40, -37, -34, -35, 9, -11, 12, -11, 22, 11, 22, 11, 11, 37, 11, 36, -36, 30, -43, 27, -11, 13, -10, 12, -13, 6, -13, 3, -65, -2, -65, -6, -13, -12, -13, -14, -10 )
+
+[node name="BlasterPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 31.2, 40.1 )
+scale = Vector2( 0.0548266, 0.0548266 )
+stream = ExtResource( 3 )
+
+[node name="WilhelmPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 4.37
+
+[node name="Blasters" type="Node" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_Xwing_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Xwing_body_entered"]
